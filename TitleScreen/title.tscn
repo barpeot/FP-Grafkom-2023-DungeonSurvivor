@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://di5gq6uok8lfu"]
+
+[ext_resource type="FontFile" uid="uid://cc5nervu2ccsv" path="res://Font/EightBitDragon-anqx.ttf" id="1_ep1ef"]
+[ext_resource type="Script" path="res://TitleScreen/title.gd" id="1_hwb0w"]
+[ext_resource type="PackedScene" uid="uid://dk7n1s66fsssj" path="res://Utility/basic_button.tscn" id="2_py7is"]
+[ext_resource type="Texture2D" uid="uid://skl7te8tfjme" path="res://Textures/dungeon tileset/knight_m_idle_anim_f0.png" id="3_m3ta6"]
+[ext_resource type="Texture2D" uid="uid://d005mjci70h0q" path="res://Textures/Items/Weapons/weapon_knife.png" id="4_3f7hp"]
+[ext_resource type="Texture2D" uid="uid://cue7euaxkuhjp" path="res://Textures/Items/Weapons/weapon_spear.png" id="5_ha5yt"]
+[ext_resource type="Texture2D" uid="uid://db7jx0pdxtapn" path="res://Textures/dungeon tileset/ogre_idle_anim_f0.png" id="6_m3oba"]
+[ext_resource type="Texture2D" uid="uid://cxa0lwfchoeqy" path="res://Textures/dungeon tileset/big_demon_idle_anim_f2.png" id="7_ak77g"]
+[ext_resource type="Texture2D" uid="uid://ch6urbi1uvulm" path="res://Textures/dungeon tileset/chort_idle_anim_f3.png" id="8_b325o"]
+[ext_resource type="Texture2D" uid="uid://rc2mv08v2qof" path="res://Textures/dungeon tileset/chort_idle_anim_f0.png" id="9_3s6yu"]
+[ext_resource type="Texture2D" uid="uid://ra71xpoai030" path="res://Textures/dungeon tileset/swampy_anim_f2.png" id="10_l1q3m"]
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+script = ExtResource("1_hwb0w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.333333, 0.4, 0.243137, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_right = 641.0
+offset_bottom = 112.0
+theme_override_fonts/font = ExtResource("1_ep1ef")
+theme_override_font_sizes/font_size = 40
+text = "Dungeon Survivors"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" type="Sprite2D" parent="ColorRect"]
+texture_filter = 1
+position = Vector2(298, 182)
+scale = Vector2(2, 2)
+texture = ExtResource("3_m3ta6")
+
+[node name="WeaponKnife" type="Sprite2D" parent="ColorRect/Player"]
+position = Vector2(12, 6)
+rotation = 0.488692
+texture = ExtResource("4_3f7hp")
+
+[node name="Spear" type="Sprite2D" parent="ColorRect/Player"]
+position = Vector2(-13, 1)
+rotation = -0.392699
+texture = ExtResource("5_ha5yt")
+
+[node name="Ogre" type="Sprite2D" parent="ColorRect"]
+texture_filter = 1
+position = Vector2(362, 147)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("6_m3oba")
+flip_h = true
+
+[node name="Demon" type="Sprite2D" parent="ColorRect"]
+texture_filter = 1
+position = Vector2(449, 149)
+scale = Vector2(4, 4)
+texture = ExtResource("7_ak77g")
+flip_h = true
+
+[node name="Chort" type="Sprite2D" parent="ColorRect"]
+texture_filter = 1
+position = Vector2(390, 187)
+scale = Vector2(2, 2)
+texture = ExtResource("8_b325o")
+flip_h = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="ColorRect"]
+texture_filter = 1
+position = Vector2(210, 172)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("9_3s6yu")
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect"]
+texture_filter = 1
+position = Vector2(228, 201)
+scale = Vector2(2, 2)
+texture = ExtResource("10_l1q3m")
+
+[node name="Ogre2" type="Sprite2D" parent="ColorRect"]
+texture_filter = 1
+position = Vector2(154, 166)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("6_m3oba")
+
+[node name="btn_exit" parent="." instance=ExtResource("2_py7is")]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 290.0
+offset_right = 360.0
+offset_bottom = 320.0
+text = "Exit
+"
+
+[node name="btn_play" parent="." instance=ExtResource("2_py7is")]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 250.0
+offset_right = 360.0
+offset_bottom = 280.0
+text = "Play
+"
+
+[connection signal="click_end" from="btn_exit" to="." method="_on_btn_exit_click_end"]
+[connection signal="click_end" from="btn_play" to="." method="_on_btn_play_click_end"]

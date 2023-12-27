@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal playerdeath
 
 var movement_speed = 40.0
 var hp = 100
@@ -11,6 +12,7 @@ var player_level = 1
 var collected_exp = 0
 var total_experience = 0
 var time = 0
+var title = "res://TitleScreen/title.tscn"
 
 # attacks
 var knife = preload("res://Player/Attack/knife.tscn")
@@ -69,6 +71,10 @@ var enemy_close = []
 @onready var collected_weapons_gui = get_node("%CollectedWeapons")
 @onready var collected_upgrades_gui = get_node("%CollectedUpgrades")
 @onready var item_container = preload("res://Player/GUI/item_container.tscn")
+@onready var death_panel = get_node("%DeathPanel")
+@onready var res_label = get_node("%ResultLabel")
+@onready var vic_snd = get_node("%victory_snd")
+@onready var lose_snd = get_node("%lose_snd")
 
 func _ready():
 
@@ -119,6 +125,22 @@ func _on_hurtbox_hurt(damage, _angle, _knockback):
 	hp -= clamp(damage - armor, 1.0, 999.0)
 	health_bar.max_value = maxhp
 	health_bar.value = hp
+	if hp <= 0:
+		death()
+
+func death():
+	death_panel.visible = true
+	emit_signal("playerdeath")
+	get_tree().paused = true
+	var tween = death_panel.create_tween()
+	tween.tween_property(death_panel, "position", Vector2(220, 50), 0.5).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.play()
+	if time >= 300:
+		res_label.text = "You Win!" 
+		vic_snd.play()
+	else:
+		res_label.text = "You Lose!\n\nTime Survived: " + timer_label.text
+		lose_snd.play()
 
 func _on_knife_timer_timeout():
 	knife_ammo += knife_baseammo + amount
@@ -264,10 +286,10 @@ func upgrade_char(upgrade):
 			knife_baseammo += 1
 		"knife3":
 			knifelevel = 3
-			knife_baseammo += 1
 		"knife4":
 			knifelevel = 4
-			knife_baseammo += 2
+			knife_atkspd -= 0.25
+			knife_baseammo += 1
 		"tornado1":
 			tornadolevel = 1
 		"tornado2":
@@ -283,12 +305,11 @@ func upgrade_char(upgrade):
 			spearlevel = 1
 		"spear2":
 			spearlevel = 2
-			spear_ammo += 1
 		"spear3":
 			spearlevel = 3
+			spear_ammo += 1
 		"spear4":
 			spearlevel = 4
-			spear_ammo += 1
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":
@@ -300,8 +321,9 @@ func upgrade_char(upgrade):
 		"ring1","ring2":
 			amount += 1
 		"food":
-			hp += 15
+			hp += 40
 			hp = clamp(hp,0,maxhp)
+			health_bar.value = hp
 	
 	update_collected_gui(upgrade)
 	attack()
@@ -322,8 +344,8 @@ func get_rand_item():
 			pass
 		elif i in available_upgrades: # upgrade already an option
 			pass
-		elif UpgradeDb.UPGRADE[i]["type"] == "item": # dont pick food
-			pass
+		#elif UpgradeDb.UPGRADE[i]["type"] == "item": # dont pick food
+			#pass
 		elif UpgradeDb.UPGRADE[i]["prereq"].size() > 0: # check prereq
 			var to_add = true
 			for n in UpgradeDb.UPGRADE[i]["prereq"]:
@@ -376,3 +398,8 @@ func update_collected_gui(upgrade):
 					collected_weapons_gui.add_child(new_item)
 				"upgrade":
 					collected_upgrades_gui.add_child(new_item)
+
+
+func _on_menu_btn_click_end():
+	get_tree().paused = false
+	get_tree().change_scene_to_file(title)

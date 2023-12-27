@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk7n1s66fsssj"]
+
+[ext_resource type="AudioStream" uid="uid://bq0a2g7ohw13p" path="res://Audio/GUI/hover.wav" id="1_df1jd"]
+[ext_resource type="Script" path="res://Utility/basic_button.gd" id="1_fk0a0"]
+[ext_resource type="FontFile" uid="uid://cc5nervu2ccsv" path="res://Font/EightBitDragon-anqx.ttf" id="1_rbmrb"]
+[ext_resource type="AudioStream" uid="uid://cpk8fhgn7dx8k" path="res://Audio/GUI/click.wav" id="2_pjqh4"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(80, 30)
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("1_rbmrb")
+theme_override_font_sizes/font_size = 14
+text = "button
+"
+script = ExtResource("1_fk0a0")
+
+[node name="hover_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_df1jd")
+
+[node name="click_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_pjqh4")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="finished" from="click_snd" to="." method="_on_click_snd_finished"]

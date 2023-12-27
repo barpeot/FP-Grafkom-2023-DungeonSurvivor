@@ -247,7 +247,7 @@ const UPGRADE = {
 	"food": {
 		"icon": ICON_PATH + "chunk.png",
 		"displayname": "Food",
-		"description": "Heals 15 HP",
+		"description": "Heals 40 HP",
 		"level": "N/A",
 		"prereq": [],
 		"type": "item"

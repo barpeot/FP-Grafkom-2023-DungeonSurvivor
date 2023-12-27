@@ -28,19 +28,19 @@ func _ready():
 		2:
 			hp = 1
 			speed = 120
-			damage = 12
+			damage = 16
 			knockback = 100
-			attack_size = 1.0 * (1 + player.spell_size)
+			attack_size = 1.1 * (1 + player.spell_size)
 		3:
 			hp = 2
 			speed = 140
-			damage = 14
+			damage = 18
 			knockback = 100
 			attack_size = 1.2 * (1 + player.spell_size)
 		4:
 			hp = 2
 			speed = 150
-			damage = 18
+			damage = 20
 			knockback = 100
 			attack_size = 1.2 * (1 + player.spell_size)
 		

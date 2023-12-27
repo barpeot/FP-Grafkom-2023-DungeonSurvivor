@@ -1,10 +1,9 @@
 extends Node2D
 
 @export var spawns: Array[Spawn_info] = []
+@export var time = 0
 
 @onready var player = get_tree().get_first_node_in_group("Player")
-
-var time = 0
 
 signal changetime(time)
 
