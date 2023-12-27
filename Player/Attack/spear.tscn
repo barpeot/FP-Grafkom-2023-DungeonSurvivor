@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqr2b01jbee43"]
+
+[ext_resource type="Script" path="res://Player/Attack/spear.gd" id="1_5xvve"]
+[ext_resource type="Texture2D" uid="uid://cue7euaxkuhjp" path="res://Textures/Items/Weapons/weapon_spear.png" id="2_4e1m0"]
+[ext_resource type="AudioStream" uid="uid://cn7gv4gd3cljq" path="res://Audio/SoundEffect/woosh.wav" id="3_ibyb2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdpnj"]
+size = Vector2(4.24264, 44.2066)
+
+[node name="Spear" type="Area2D" groups=["Attack"]]
+top_level = true
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_5xvve")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0.227732, 1.10372)
+rotation = -0.785398
+scale = Vector2(0.793528, 1.62943)
+texture = ExtResource("2_4e1m0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.25, 0.750001)
+rotation = -0.785398
+scale = Vector2(1, 1.13568)
+shape = SubResource("RectangleShape2D_kdpnj")
+disabled = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="ChangeDirection" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="ResetPosTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+autostart = true
+
+[node name="spear_snd" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ibyb2")
+volume_db = -10.0
+pitch_scale = 1.1
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="ChangeDirection" to="." method="_on_change_direction_timeout"]
+[connection signal="timeout" from="ResetPosTimer" to="." method="_on_reset_pos_timer_timeout"]

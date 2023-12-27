@@ -1,0 +1,315 @@
+[gd_scene load_steps=15 format=3 uid="uid://co4t3fiq6v4h3"]
+
+[ext_resource type="Texture2D" uid="uid://d3exthy3tyrsh" path="res://Textures/dungeon tileset/floor_1.png" id="1_4g618"]
+[ext_resource type="Texture2D" uid="uid://dcgtqk7hbjkmd" path="res://Textures/dungeon tileset/floor_3.png" id="2_v2xmw"]
+[ext_resource type="Texture2D" uid="uid://dahli1tlbkb5o" path="res://Textures/dungeon tileset/floor_2.png" id="3_dpqg4"]
+[ext_resource type="PackedScene" uid="uid://dbvmk3gdmk705" path="res://Player/player.tscn" id="4_blt16"]
+[ext_resource type="PackedScene" uid="uid://bvr31eqguuc1l" path="res://Utility/enemy_spawner.tscn" id="5_m52oi"]
+[ext_resource type="PackedScene" uid="uid://b3hof7kdyjkos" path="res://Enemy/enemy_chort_small.tscn" id="6_yw77p"]
+[ext_resource type="Script" path="res://Utility/spawn_info.gd" id="7_wcgw4"]
+[ext_resource type="PackedScene" uid="uid://ckexcvb8m2emo" path="res://Objects/gem.tscn" id="8_ilqn2"]
+[ext_resource type="PackedScene" uid="uid://cmit6kl42ltds" path="res://Enemy/enemy_chort_big.tscn" id="8_iqg3g"]
+[ext_resource type="PackedScene" uid="uid://10o7wr1bor1r" path="res://Enemy/enemy_sludge.tscn" id="10_puke5"]
+
+[sub_resource type="Resource" id="Resource_sfxca"]
+script = ExtResource("7_wcgw4")
+time_start = 0
+time_end = 5
+enemy = ExtResource("10_puke5")
+enemy_num = 1
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_xpiet"]
+script = ExtResource("7_wcgw4")
+time_start = 0
+time_end = 2
+enemy = ExtResource("8_iqg3g")
+enemy_num = 1
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_rmlil"]
+script = ExtResource("7_wcgw4")
+time_start = 6
+time_end = 15
+enemy = ExtResource("6_yw77p")
+enemy_num = 3
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_ej6vl"]
+script = ExtResource("7_wcgw4")
+time_start = 0
+time_end = 10
+enemy = ExtResource("10_puke5")
+enemy_num = 2
+enemy_spawn_delay = 0
+
+[node name="GameWorld" type="Node2D"]
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="BackgroundSprite"]
+texture_filter = 2
+texture_repeat = 2
+texture = ExtResource("1_4g618")
+region_enabled = true
+region_rect = Rect2(-3200, -3200, 1600, 1600)
+
+[node name="Floor7" type="Sprite2D" parent="BackgroundSprite/Background"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(448, 96)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor2" type="Sprite2D" parent="BackgroundSprite/Background"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-672, 672)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor3" type="Sprite2D" parent="BackgroundSprite/Background"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(128, 128)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor4" type="Sprite2D" parent="BackgroundSprite/Background"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-480, -304)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor5" type="Sprite2D" parent="BackgroundSprite/Background"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(560, -432)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor6" type="Sprite2D" parent="BackgroundSprite/Background"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(208, -608)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor8" type="Sprite2D" parent="BackgroundSprite/Background"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-240, -608)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Background2" type="Sprite2D" parent="BackgroundSprite"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(0, 1600)
+texture = ExtResource("1_4g618")
+region_enabled = true
+region_rect = Rect2(-3200, -3200, 1600, 1600)
+
+[node name="Floor7" type="Sprite2D" parent="BackgroundSprite/Background2"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(448, 96)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor2" type="Sprite2D" parent="BackgroundSprite/Background2"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-672, 672)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor3" type="Sprite2D" parent="BackgroundSprite/Background2"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(128, 128)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor4" type="Sprite2D" parent="BackgroundSprite/Background2"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-480, -304)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor5" type="Sprite2D" parent="BackgroundSprite/Background2"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(560, -432)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor6" type="Sprite2D" parent="BackgroundSprite/Background2"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(208, -608)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor8" type="Sprite2D" parent="BackgroundSprite/Background2"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-240, -608)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Background3" type="Sprite2D" parent="BackgroundSprite"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-1600, 1600)
+texture = ExtResource("1_4g618")
+region_enabled = true
+region_rect = Rect2(-3200, -3200, 1600, 1600)
+
+[node name="Floor7" type="Sprite2D" parent="BackgroundSprite/Background3"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(448, 96)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor2" type="Sprite2D" parent="BackgroundSprite/Background3"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-672, 672)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor3" type="Sprite2D" parent="BackgroundSprite/Background3"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(128, 128)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor4" type="Sprite2D" parent="BackgroundSprite/Background3"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-480, -304)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor5" type="Sprite2D" parent="BackgroundSprite/Background3"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(560, -432)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor6" type="Sprite2D" parent="BackgroundSprite/Background3"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(208, -608)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor8" type="Sprite2D" parent="BackgroundSprite/Background3"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-240, -608)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Background4" type="Sprite2D" parent="BackgroundSprite"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-1600, 0)
+texture = ExtResource("1_4g618")
+region_enabled = true
+region_rect = Rect2(-3200, -3200, 1600, 1600)
+
+[node name="Floor7" type="Sprite2D" parent="BackgroundSprite/Background4"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(448, 96)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor2" type="Sprite2D" parent="BackgroundSprite/Background4"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-672, 672)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor3" type="Sprite2D" parent="BackgroundSprite/Background4"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(128, 128)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor4" type="Sprite2D" parent="BackgroundSprite/Background4"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-480, -304)
+texture = ExtResource("3_dpqg4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Floor5" type="Sprite2D" parent="BackgroundSprite/Background4"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(560, -432)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor6" type="Sprite2D" parent="BackgroundSprite/Background4"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(208, -608)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Floor8" type="Sprite2D" parent="BackgroundSprite/Background4"]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(-240, -608)
+texture = ExtResource("2_v2xmw")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Player" parent="." instance=ExtResource("4_blt16")]
+position = Vector2(69, 85)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("5_m52oi")]
+spawns = Array[ExtResource("7_wcgw4")]([SubResource("Resource_sfxca"), SubResource("Resource_xpiet"), SubResource("Resource_rmlil"), SubResource("Resource_ej6vl")])
+
+[node name="Loot" type="Node2D" parent="." groups=["Loot"]]
+
+[node name="Gem" parent="Loot" instance=ExtResource("8_ilqn2")]
+position = Vector2(69, 91)
+expval = 5
